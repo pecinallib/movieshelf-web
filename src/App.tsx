@@ -4,6 +4,9 @@ import { Header } from './components/layout/Header';
 import { Login } from './pages/Auth/Login';
 import { Register } from './pages/Auth/Register';
 import { Home } from './pages/Home/Home';
+import { Search } from './pages/Home/Search';
+import { MovieDetails } from './pages/Movie/MovieDetails';
+import { TVDetails } from './pages/TV/TVDetails';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -39,6 +42,30 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <Home />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <PrivateRoute>
+            <Search />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/movie/:id"
+        element={
+          <PrivateRoute>
+            <MovieDetails />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/tv/:id"
+        element={
+          <PrivateRoute>
+            <TVDetails />
           </PrivateRoute>
         }
       />
