@@ -7,6 +7,10 @@ import { Home } from './pages/Home/Home';
 import { Search } from './pages/Home/Search';
 import { MovieDetails } from './pages/Movie/MovieDetails';
 import { TVDetails } from './pages/TV/TVDetails';
+import { Favorites } from './pages/Favorites/Favorites';
+import { Lists } from './pages/Lists/Lists';
+import { ListDetails } from './pages/Lists/ListDetails';
+import { Reviews } from './pages/Reviews/Reviews';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -66,6 +70,38 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <TVDetails />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/favorites"
+        element={
+          <PrivateRoute>
+            <Favorites />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/lists"
+        element={
+          <PrivateRoute>
+            <Lists />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/lists/:id"
+        element={
+          <PrivateRoute>
+            <ListDetails />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/reviews"
+        element={
+          <PrivateRoute>
+            <Reviews />
           </PrivateRoute>
         }
       />
