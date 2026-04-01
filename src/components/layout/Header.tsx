@@ -1,133 +1,191 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Film, Heart, List, Star, LogOut, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import {
+  Film,
+  Heart,
+  List,
+  Star,
+  LogOut,
+  Menu,
+  X,
+  Home,
+  User,
+} from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 
 export function Header() {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Fecha o menu ao mudar de rota
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  // Bloqueia scroll do body quando menu tá aberto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
   function handleLogout() {
     logout();
     navigate('/login');
   }
 
+  const navLinks = [
+    { to: '/', label: 'Início', icon: Home },
+    { to: '/favorites', label: 'Favoritos', icon: Heart },
+    { to: '/lists', label: 'Listas', icon: List },
+    { to: '/reviews', label: 'Reviews', icon: Star },
+  ];
+
+  function isActive(path: string) {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  }
+
   return (
-    <header className="bg-[#0f0f14] border-b border-[#27272f] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-          <Film className="w-6 h-6 text-gold-300" />
-          <span className="text-gold-metallic">MovieShelf</span>
-        </Link>
+    <>
+      <header className="bg-[#0f0f14] border-b border-[#27272f] sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+            <Film className="w-6 h-6 text-gold-300" />
+            <span className="text-gold-metallic">MovieShelf</span>
+          </Link>
 
-        {isAuthenticated && (
-          <>
-            <nav className="hidden md:flex items-center gap-6">
-              <Link
-                to="/"
-                className="text-zinc-400 hover:text-gold-300 transition-colors text-sm"
-              >
-                Início
-              </Link>
-              <Link
-                to="/favorites"
-                className="text-zinc-400 hover:text-gold-300 transition-colors text-sm flex items-center gap-1"
-              >
-                <Heart className="w-4 h-4" />
-                Favoritos
-              </Link>
-              <Link
-                to="/lists"
-                className="text-zinc-400 hover:text-gold-300 transition-colors text-sm flex items-center gap-1"
-              >
-                <List className="w-4 h-4" />
-                Listas
-              </Link>
-              <Link
-                to="/reviews"
-                className="text-zinc-400 hover:text-gold-300 transition-colors text-sm flex items-center gap-1"
-              >
-                <Star className="w-4 h-4" />
-                Reviews
-              </Link>
-            </nav>
+          {isAuthenticated && (
+            <>
+              <nav className="hidden md:flex items-center gap-6">
+                {navLinks.map(({ to, label, icon: Icon }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`text-sm flex items-center gap-1 transition-colors ${
+                      isActive(to)
+                        ? 'text-gold-300'
+                        : 'text-zinc-400 hover:text-gold-300'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {label}
+                  </Link>
+                ))}
+              </nav>
 
-            <div className="hidden md:flex items-center gap-4">
-              <ThemeToggle />
-              <span className="text-zinc-400 text-sm">{user?.name}</span>
+              <div className="hidden md:flex items-center gap-4">
+                <ThemeToggle />
+                <span className="text-zinc-400 text-sm">{user?.name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-zinc-400 hover:text-red-400 transition-colors cursor-pointer"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
+
               <button
-                onClick={handleLogout}
-                className="text-zinc-400 hover:text-red-400 transition-colors cursor-pointer"
+                onClick={() => setMenuOpen(true)}
+                className="md:hidden text-zinc-300 cursor-pointer"
               >
-                <LogOut className="w-5 h-5" />
+                <Menu className="w-6 h-6" />
+              </button>
+            </>
+          )}
+        </div>
+      </header>
+
+      {/* Mobile Sidebar Modal */}
+      {isAuthenticated && (
+        <div
+          className={`fixed inset-0 z-100 md:hidden transition-opacity duration-300 ${
+            menuOpen
+              ? 'opacity-100 pointer-events-auto'
+              : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          {/* Sidebar */}
+          <div
+            className={`absolute top-0 right-0 h-full w-72 bg-[#0f0f14] border-l border-[#27272f] shadow-2xl transition-transform duration-300 ${
+              menuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+          >
+            {/* Header do sidebar */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[#27272f]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gold-300/10 border border-gold-300/30 flex items-center justify-center">
+                  <User className="w-5 h-5 text-gold-300" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-medium">{user?.name}</p>
+                  <p className="text-zinc-500 text-xs">{user?.email}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="text-zinc-400 hover:text-white cursor-pointer"
+              >
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden text-zinc-300 cursor-pointer"
-            >
-              {menuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </>
-        )}
-      </div>
+            {/* Navigation */}
+            <nav className="px-3 py-4 space-y-1">
+              {navLinks.map(({ to, label, icon: Icon }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+                    isActive(to)
+                      ? 'bg-gold-300/10 text-gold-300 border border-gold-300/20'
+                      : 'text-zinc-300 hover:bg-[#18181f] hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="text-sm font-medium">{label}</span>
+                </Link>
+              ))}
+            </nav>
 
-      {menuOpen && isAuthenticated && (
-        <nav className="md:hidden bg-[#0f0f14] border-t border-[#27272f] px-4 py-4 flex flex-col gap-4">
-          <Link
-            to="/"
-            onClick={() => setMenuOpen(false)}
-            className="text-zinc-300 hover:text-gold-300 transition-colors"
-          >
-            Início
-          </Link>
-          <Link
-            to="/favorites"
-            onClick={() => setMenuOpen(false)}
-            className="text-zinc-300 hover:text-gold-300 transition-colors flex items-center gap-2"
-          >
-            <Heart className="w-4 h-4" />
-            Favoritos
-          </Link>
-          <Link
-            to="/lists"
-            onClick={() => setMenuOpen(false)}
-            className="text-zinc-300 hover:text-gold-300 transition-colors flex items-center gap-2"
-          >
-            <List className="w-4 h-4" />
-            Listas
-          </Link>
-          <Link
-            to="/reviews"
-            onClick={() => setMenuOpen(false)}
-            className="text-zinc-300 hover:text-gold-300 transition-colors flex items-center gap-2"
-          >
-            <Star className="w-4 h-4" />
-            Reviews
-          </Link>
-          <div className="flex items-center gap-2 text-zinc-300">
-            <ThemeToggle />
-            <span className="text-sm">Tema</span>
+            {/* Divider */}
+            <div className="mx-6 h-px bg-[#27272f]" />
+
+            {/* Settings */}
+            <div className="px-3 py-4 space-y-1">
+              <div className="flex items-center justify-between px-4 py-3 rounded-xl text-zinc-300">
+                <span className="text-sm font-medium">Tema</span>
+                <ThemeToggle />
+              </div>
+            </div>
+
+            {/* Logout */}
+            <div className="absolute bottom-0 left-0 right-0 px-3 py-4 border-t border-[#27272f]">
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-all duration-200 cursor-pointer"
+              >
+                <LogOut className="w-5 h-5" />
+                <span className="text-sm font-medium">Sair da conta</span>
+              </button>
+            </div>
           </div>
-          <button
-            onClick={() => {
-              handleLogout();
-              setMenuOpen(false);
-            }}
-            className="text-red-400 flex items-center gap-2 cursor-pointer"
-          >
-            <LogOut className="w-4 h-4" />
-            Sair
-          </button>
-        </nav>
+        </div>
       )}
-    </header>
+    </>
   );
 }
