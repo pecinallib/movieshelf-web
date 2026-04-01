@@ -87,21 +87,21 @@ export function AddToList({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-slate-300 border border-slate-700 hover:border-purple-500/50 rounded-xl font-medium transition-colors cursor-pointer"
+        className="flex items-center gap-2 px-6 py-3 bg-[#18181f] text-zinc-300 border border-[#27272f] hover:border-gold-300/50 rounded-xl font-medium transition-colors cursor-pointer"
       >
         <ListIcon className="w-5 h-5" />
         Adicionar à lista
       </button>
 
       {open && (
-        <div className="absolute top-14 left-0 w-72 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+        <div className="absolute top-14 left-0 w-72 bg-[#0f0f14] border border-[#27272f] rounded-xl shadow-2xl z-50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#27272f]">
             <span className="text-white text-sm font-medium">
               Minhas listas
             </span>
             <button
               onClick={() => setOpen(false)}
-              className="text-slate-400 hover:text-white cursor-pointer"
+              className="text-zinc-400 hover:text-white cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -109,7 +109,7 @@ export function AddToList({
 
           <div className="max-h-60 overflow-y-auto">
             {loading ? (
-              <div className="px-4 py-6 text-center text-slate-400 text-sm">
+              <div className="px-4 py-6 text-center text-zinc-400 text-sm">
                 Carregando...
               </div>
             ) : lists.length > 0 ? (
@@ -122,25 +122,25 @@ export function AddToList({
                     disabled={added}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
                       added
-                        ? 'bg-purple-500/10 text-purple-300'
-                        : 'text-slate-300 hover:bg-slate-800 cursor-pointer'
+                        ? 'bg-gold-300/10 text-gold-300'
+                        : 'text-zinc-300 hover:bg-[#18181f] cursor-pointer'
                     }`}
                   >
                     <span className="text-sm truncate">{list.name}</span>
                     {added && (
-                      <Check className="w-4 h-4 text-purple-400 shrink-0" />
+                      <Check className="w-4 h-4 text-gold-300 shrink-0" />
                     )}
                   </button>
                 );
               })
             ) : (
-              <div className="px-4 py-6 text-center text-slate-400 text-sm">
+              <div className="px-4 py-6 text-center text-zinc-400 text-sm">
                 Nenhuma lista
               </div>
             )}
           </div>
 
-          <div className="border-t border-slate-800">
+          <div className="border-t border-[#27272f]">
             {showNewForm ? (
               <form onSubmit={handleCreateAndAdd} className="p-3 flex gap-2">
                 <input
@@ -149,12 +149,12 @@ export function AddToList({
                   onChange={(e) => setNewListName(e.target.value)}
                   placeholder="Nome da lista"
                   autoFocus
-                  className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                  className="flex-1 px-3 py-2 bg-[#18181f] border border-[#27272f] rounded-lg text-white text-sm placeholder-zinc-500 focus:outline-none focus:border-gold-300"
                 />
                 <button
                   type="submit"
                   disabled={creating}
-                  className="px-3 py-2 bg-purple-600 text-white rounded-lg text-sm cursor-pointer"
+                  className="px-3 py-2 btn-gold rounded-lg text-sm cursor-pointer"
                 >
                   {creating ? '...' : 'Criar'}
                 </button>
@@ -162,7 +162,7 @@ export function AddToList({
             ) : (
               <button
                 onClick={() => setShowNewForm(true)}
-                className="w-full flex items-center gap-2 px-4 py-3 text-purple-400 hover:bg-slate-800 text-sm transition-colors cursor-pointer"
+                className="w-full flex items-center gap-2 px-4 py-3 text-gold-300 hover:bg-[#18181f] text-sm transition-colors cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 Nova lista

@@ -74,7 +74,7 @@ export function ReviewForm({ tmdbId, mediaType }: ReviewFormProps) {
   }
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+    <div className="bg-[#0f0f14] border border-[#27272f] rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-white">
           {existingReview ? 'Sua Review' : 'Avaliar'}
@@ -82,7 +82,7 @@ export function ReviewForm({ tmdbId, mediaType }: ReviewFormProps) {
         {existingReview && (
           <button
             onClick={handleDelete}
-            className="text-slate-600 hover:text-red-400 transition-colors cursor-pointer"
+            className="text-zinc-600 hover:text-red-400 transition-colors cursor-pointer"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -103,14 +103,14 @@ export function ReviewForm({ tmdbId, mediaType }: ReviewFormProps) {
               <Star
                 className={`w-7 h-7 transition-colors ${
                   i < (hoverRating || rating)
-                    ? 'text-yellow-500 fill-yellow-500'
-                    : 'text-slate-600'
+                    ? 'text-gold-300 fill-gold-300'
+                    : 'text-zinc-700'
                 }`}
               />
             </button>
           ))}
           {rating > 0 && (
-            <span className="text-slate-400 text-sm ml-2">{rating}/5</span>
+            <span className="text-zinc-400 text-sm ml-2">{rating}/5</span>
           )}
         </div>
 
@@ -119,14 +119,14 @@ export function ReviewForm({ tmdbId, mediaType }: ReviewFormProps) {
           onChange={(e) => setComment(e.target.value)}
           placeholder="Escreva um comentário (opcional)"
           rows={3}
-          className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors resize-none"
+          className="w-full px-4 py-3 bg-[#18181f] border border-[#27272f] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-gold-300 transition-colors resize-none"
         />
 
         <div className="flex items-center gap-3">
           <button
             type="submit"
             disabled={loading || rating === 0}
-            className="px-6 py-2 bg-purple-600 hover:bg-purple-500 disabled:bg-slate-700 text-white rounded-xl text-sm font-medium transition-colors cursor-pointer"
+            className="px-6 py-2 btn-gold disabled:bg-zinc-700 disabled:bg-none rounded-xl text-sm font-medium transition-colors cursor-pointer"
           >
             {loading ? 'Salvando...' : existingReview ? 'Atualizar' : 'Enviar'}
           </button>

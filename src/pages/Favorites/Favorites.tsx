@@ -21,7 +21,7 @@ export function Favorites() {
   }, [filter]);
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-8">
+    <div className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
           <Heart className="w-6 h-6 text-red-400" />
@@ -35,8 +35,8 @@ export function Favorites() {
               onClick={() => setFilter(type)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                 filter === type
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-slate-800 text-slate-300 border border-slate-700 hover:border-purple-500/50'
+                  ? 'btn-gold'
+                  : 'bg-[#18181f] text-zinc-300 border border-[#27272f] hover:border-gold-300/50'
               }`}
             >
               {type === 'all'
@@ -49,7 +49,7 @@ export function Favorites() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-slate-400">Carregando...</div>
+          <div className="text-center py-12 text-zinc-400">Carregando...</div>
         ) : favorites.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {favorites.map((fav) => (
@@ -58,7 +58,7 @@ export function Favorites() {
                 to={`/${fav.mediaType}/${fav.tmdbId}`}
                 className="group"
               >
-                <div className="relative overflow-hidden rounded-xl bg-slate-800 border border-slate-700 hover:border-purple-500/50 transition-all duration-300">
+                <div className="relative overflow-hidden rounded-xl bg-[#0f0f14] border border-[#27272f] hover:border-gold-300/50 transition-all duration-300">
                   {fav.posterPath ? (
                     <img
                       src={`${IMG_BASE}${fav.posterPath}`}
@@ -66,7 +66,7 @@ export function Favorites() {
                       className="w-full aspect-2/3 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full aspect-2/3 bg-slate-700 flex items-center justify-center text-slate-500 text-sm">
+                    <div className="w-full aspect-2/3 bg-[#18181f] flex items-center justify-center text-zinc-500 text-sm">
                       Sem imagem
                     </div>
                   )}
@@ -74,7 +74,7 @@ export function Favorites() {
                     <h3 className="text-white font-semibold text-sm truncate">
                       {fav.title}
                     </h3>
-                    <span className="inline-block mt-1 px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-500/30">
+                    <span className="inline-block mt-1 px-2 py-0.5 badge-gold text-xs rounded-full">
                       {fav.mediaType === 'movie' ? 'Filme' : 'Série'}
                     </span>
                   </div>
@@ -87,11 +87,11 @@ export function Favorites() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <Heart className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-            <p className="text-slate-400">Nenhum favorito ainda</p>
+            <Heart className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
+            <p className="text-zinc-400">Nenhum favorito ainda</p>
             <Link
               to="/"
-              className="text-purple-400 hover:text-purple-300 text-sm mt-2 inline-block"
+              className="text-gold-300 hover:text-gold-200 text-sm mt-2 inline-block"
             >
               Explorar filmes e séries
             </Link>
