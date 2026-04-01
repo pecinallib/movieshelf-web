@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getMyLists, createList, deleteList } from '../../services/lists';
 import { List } from '../../types/models';
 import { List as ListIcon, Plus, Trash2, Film } from 'lucide-react';
+import { AnimatedPage } from '../../components/ui/AnimatedPage';
 
 export function Lists() {
   const [lists, setLists] = useState<List[]>([]);
@@ -57,7 +58,7 @@ export function Lists() {
   }
 
   return (
-    <div className="min-h-screen bg-[#09090b] px-4 py-8">
+    <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
@@ -166,6 +167,6 @@ export function Lists() {
           </div>
         )}
       </div>
-    </div>
+    </AnimatedPage>
   );
 }

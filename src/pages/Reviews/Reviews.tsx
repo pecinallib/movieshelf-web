@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { listMyReviews, deleteReview } from '../../services/reviews';
 import { Review } from '../../types/models';
 import { Star, Trash2 } from 'lucide-react';
+import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
 
 export function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -33,7 +34,7 @@ export function Reviews() {
   }
 
   return (
-    <div className="min-h-screen bg-[#09090b] px-4 py-8">
+    <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
           <Star className="w-6 h-6 text-gold-300" />
@@ -65,7 +66,7 @@ export function Reviews() {
         ) : reviews.length > 0 ? (
           <div className="space-y-4">
             {reviews.map((review) => (
-              <div
+              <AnimatedItem
                 key={review.id}
                 className="bg-[#0f0f14] border border-[#27272f] rounded-2xl p-6 hover:border-gold-300/30 transition-all duration-300"
               >
@@ -107,7 +108,7 @@ export function Reviews() {
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
-              </div>
+              </AnimatedItem>
             ))}
           </div>
         ) : (
@@ -123,6 +124,6 @@ export function Reviews() {
           </div>
         )}
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
