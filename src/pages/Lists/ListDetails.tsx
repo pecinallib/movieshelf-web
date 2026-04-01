@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getListById, removeItemFromList } from '../../services/lists';
 import { List } from '../../types/models';
 import { ArrowLeft, Trash2 } from 'lucide-react';
+import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
@@ -37,22 +38,22 @@ export function ListDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
+      <AnimatedPage className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
         Carregando...
-      </div>
+      </AnimatedPage>
     );
   }
 
   if (!list) {
     return (
-      <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
+      <AnimatedPage className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
         Lista não encontrada
-      </div>
+      </AnimatedPage>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#09090b] px-4 py-8">
+    <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <button
           onClick={() => navigate('/lists')}
@@ -75,7 +76,7 @@ export function ListDetails() {
         {list.items && list.items.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {list.items.map((item) => (
-              <div key={item.id} className="relative group">
+              <AnimatedItem key={item.id} className="relative group">
                 <Link to={`/${item.mediaType}/${item.tmdbId}`}>
                   <div className="overflow-hidden rounded-xl bg-[#0f0f14] border border-[#27272f] hover:border-gold-300/50 transition-all duration-300">
                     {item.posterPath ? (
@@ -105,7 +106,7 @@ export function ListDetails() {
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
-              </div>
+              </AnimatedItem>
             ))}
           </div>
         ) : (
@@ -120,6 +121,6 @@ export function ListDetails() {
           </div>
         )}
       </div>
-    </div>
+    </AnimatedPage>
   );
 }

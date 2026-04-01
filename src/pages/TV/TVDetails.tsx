@@ -9,6 +9,9 @@ import {
 import { AddToList } from '../../components/ui/AddToList';
 import { ReviewForm } from '../../components/ui/ReviewForm';
 import { Heart, Star, Play, ArrowLeft } from 'lucide-react';
+import { AnimatedPage } from '../../components/ui/AnimatedPage';
+import { DetailsSkeleton } from '../../components/ui/Skeleton';
+import { motion } from 'framer-motion';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
@@ -59,11 +62,7 @@ export function TVDetails() {
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
-        Carregando...
-      </div>
-    );
+    return <DetailsSkeleton />;
   }
 
   if (!show) {
@@ -83,7 +82,7 @@ export function TVDetails() {
     : '';
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <AnimatedPage className="min-h-screen bg-[#09090b]">
       {show.backdrop_path && (
         <div className="relative h-100 w-full">
           <img
@@ -106,7 +105,10 @@ export function TVDetails() {
 
         <div className="flex flex-col md:flex-row gap-8">
           {show.poster_path && (
-            <img
+            <motion.img
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
               src={`${IMG_BASE}${show.poster_path}`}
               alt={show.name}
               className="w-64 rounded-2xl shadow-2xl shrink-0 self-start"
@@ -229,6 +231,6 @@ export function TVDetails() {
           </div>
         </div>
       </div>
-    </div>
+    </AnimatedPage>
   );
 }

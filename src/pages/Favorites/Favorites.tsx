@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { listFavorites } from '../../services/favorites';
 import { Favorite } from '../../types/models';
 import { Heart } from 'lucide-react';
+import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
+import { CardGridSkeleton } from '../../components/ui/Skeleton';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
@@ -21,7 +23,7 @@ export function Favorites() {
   }, [filter]);
 
   return (
-    <div className="min-h-screen bg-[#09090b] px-4 py-8">
+    <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
           <Heart className="w-6 h-6 text-red-400" />
@@ -49,40 +51,42 @@ export function Favorites() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-zinc-400">Carregando...</div>
+          <CardGridSkeleton count={10} />
         ) : favorites.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {favorites.map((fav) => (
-              <Link
-                key={fav.id}
-                to={`/${fav.mediaType}/${fav.tmdbId}`}
-                className="group"
-              >
-                <div className="relative overflow-hidden rounded-xl bg-[#0f0f14] border border-[#27272f] hover:border-gold-300/50 transition-all duration-300">
-                  {fav.posterPath ? (
-                    <img
-                      src={`${IMG_BASE}${fav.posterPath}`}
-                      alt={fav.title}
-                      className="w-full aspect-2/3 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-full aspect-2/3 bg-[#18181f] flex items-center justify-center text-zinc-500 text-sm">
-                      Sem imagem
+            {favorites.map((fav, index) => (
+              <AnimatedItem key={fav.id} index={index}>
+                <Link
+                  key={fav.id}
+                  to={`/${fav.mediaType}/${fav.tmdbId}`}
+                  className="group"
+                >
+                  <div className="relative overflow-hidden rounded-xl bg-[#0f0f14] border border-[#27272f] hover:border-gold-300/50 transition-all duration-300">
+                    {fav.posterPath ? (
+                      <img
+                        src={`${IMG_BASE}${fav.posterPath}`}
+                        alt={fav.title}
+                        className="w-full aspect-2/3 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full aspect-2/3 bg-[#18181f] flex items-center justify-center text-zinc-500 text-sm">
+                        Sem imagem
+                      </div>
+                    )}
+                    <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 to-transparent p-4">
+                      <h3 className="text-white font-semibold text-sm truncate">
+                        {fav.title}
+                      </h3>
+                      <span className="inline-block mt-1 px-2 py-0.5 badge-gold text-xs rounded-full">
+                        {fav.mediaType === 'movie' ? 'Filme' : 'Série'}
+                      </span>
                     </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 to-transparent p-4">
-                    <h3 className="text-white font-semibold text-sm truncate">
-                      {fav.title}
-                    </h3>
-                    <span className="inline-block mt-1 px-2 py-0.5 badge-gold text-xs rounded-full">
-                      {fav.mediaType === 'movie' ? 'Filme' : 'Série'}
-                    </span>
+                    <div className="absolute top-2 right-2">
+                      <Heart className="w-5 h-5 text-red-400 fill-red-400" />
+                    </div>
                   </div>
-                  <div className="absolute top-2 right-2">
-                    <Heart className="w-5 h-5 text-red-400 fill-red-400" />
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </AnimatedItem>
             ))}
           </div>
         ) : (
@@ -98,6 +102,6 @@ export function Favorites() {
           </div>
         )}
       </div>
-    </div>
+    </AnimatedPage>
   );
 }

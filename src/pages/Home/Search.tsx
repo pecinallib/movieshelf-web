@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { searchMedia } from '../../services/tmdb';
 import { MediaCard } from '../../components/ui/MediaCard';
 import { SearchBar } from '../../components/ui/SearchBar';
+import { CardGridSkeleton } from '../../components/ui/Skeleton';
+import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
 import { TMDBResult } from '../../types/tmdb';
 import { Search as SearchIcon } from 'lucide-react';
 
@@ -48,7 +50,7 @@ export function Search() {
   }
 
   return (
-    <div className="min-h-screen bg-[#09090b] px-4 py-8">
+    <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-center mb-8">
           <SearchBar />
@@ -64,12 +66,17 @@ export function Search() {
         )}
 
         {loading ? (
-          <div className="text-center py-12 text-zinc-400">Buscando...</div>
+          <CardGridSkeleton count={10} />
         ) : results.length > 0 ? (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {results.map((item) => (
-                <MediaCard key={`${item.media_type}-${item.id}`} item={item} />
+              {results.map((item, index) => (
+                <AnimatedItem
+                  key={`${item.media_type}-${item.id}`}
+                  index={index}
+                >
+                  <MediaCard item={item} />
+                </AnimatedItem>
               ))}
             </div>
 
@@ -90,6 +97,6 @@ export function Search() {
           </div>
         ) : null}
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
