@@ -16,13 +16,13 @@ export function SearchBar() {
 
   return (
     <form onSubmit={handleSubmit} className="relative w-full max-w-xl">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Buscar filmes e séries..."
-        className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors"
+        className="w-full pl-10 pr-4 py-3 bg-[#18181f] border border-[#27272f] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-gold-300 transition-colors"
       />
     </form>
   );

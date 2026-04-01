@@ -60,7 +60,7 @@ export function MovieDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
         Carregando...
       </div>
     );
@@ -68,7 +68,7 @@ export function MovieDetails() {
 
   if (!movie) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center text-zinc-400">
         Filme não encontrado
       </div>
     );
@@ -87,7 +87,7 @@ export function MovieDetails() {
   const duration = movie.runtime ? `${hours}h ${minutes}min` : '';
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#09090b]">
       {movie.backdrop_path && (
         <div className="relative h-100 w-full">
           <img
@@ -95,14 +95,14 @@ export function MovieDetails() {
             alt={movie.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#09090b] via-[#09090b]/60 to-transparent" />
         </div>
       )}
 
       <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors cursor-pointer"
+          className="flex items-center gap-2 text-zinc-400 hover:text-white mb-6 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           Voltar
@@ -122,13 +122,13 @@ export function MovieDetails() {
               {movie.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 mb-6 text-slate-400 text-sm">
+            <div className="flex flex-wrap items-center gap-4 mb-6 text-zinc-400 text-sm">
               {year && <span>{year}</span>}
               {duration && <span>{duration}</span>}
               {movie.vote_average > 0 && (
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                  <span className="text-yellow-500 font-medium">
+                  <Star className="w-4 h-4 text-gold-300 fill-gold-300" />
+                  <span className="text-gold-300 font-medium">
                     {movie.vote_average.toFixed(1)}
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export function MovieDetails() {
               {movie.genres?.map((g: any) => (
                 <span
                   key={g.id}
-                  className="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs rounded-full"
+                  className="px-3 py-1 badge-gold text-xs rounded-full"
                 >
                   {g.name}
                 </span>
@@ -153,7 +153,7 @@ export function MovieDetails() {
                 className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-colors cursor-pointer ${
                   isFavorite
                     ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30'
-                    : 'bg-slate-800 text-slate-300 border border-slate-700 hover:border-purple-500/50'
+                    : 'bg-[#18181f] text-zinc-300 border border-[#27272f] hover:border-gold-300/50'
                 }`}
               >
                 <Heart
@@ -174,7 +174,7 @@ export function MovieDetails() {
                   href={`https://www.youtube.com/watch?v=${trailer.key}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-medium transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 btn-gold rounded-xl font-medium transition-colors"
                 >
                   <Play className="w-5 h-5" />
                   Trailer
@@ -187,7 +187,7 @@ export function MovieDetails() {
                 <h2 className="text-lg font-semibold text-white mb-3">
                   Sinopse
                 </h2>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-zinc-300 leading-relaxed">
                   {movie.overview}
                 </p>
               </div>
@@ -212,14 +212,14 @@ export function MovieDetails() {
                           className="w-full aspect-square object-cover rounded-xl mb-2"
                         />
                       ) : (
-                        <div className="w-full aspect-square bg-slate-800 rounded-xl mb-2 flex items-center justify-center text-slate-600 text-xs">
+                        <div className="w-full aspect-square bg-[#18181f] rounded-xl mb-2 flex items-center justify-center text-zinc-600 text-xs">
                           Sem foto
                         </div>
                       )}
                       <p className="text-white text-xs font-medium truncate">
                         {actor.name}
                       </p>
-                      <p className="text-slate-500 text-xs truncate">
+                      <p className="text-zinc-500 text-xs truncate">
                         {actor.character}
                       </p>
                     </div>

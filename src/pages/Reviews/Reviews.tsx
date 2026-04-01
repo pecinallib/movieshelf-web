@@ -33,10 +33,10 @@ export function Reviews() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-8">
+    <div className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-8">
-          <Star className="w-6 h-6 text-yellow-500" />
+          <Star className="w-6 h-6 text-gold-300" />
           <h1 className="text-2xl font-bold text-white">Minhas Reviews</h1>
         </div>
 
@@ -47,8 +47,8 @@ export function Reviews() {
               onClick={() => setFilter(type)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                 filter === type
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-slate-800 text-slate-300 border border-slate-700 hover:border-purple-500/50'
+                  ? 'btn-gold'
+                  : 'bg-[#18181f] text-zinc-300 border border-[#27272f] hover:border-gold-300/50'
               }`}
             >
               {type === 'all'
@@ -61,13 +61,13 @@ export function Reviews() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-slate-400">Carregando...</div>
+          <div className="text-center py-12 text-zinc-400">Carregando...</div>
         ) : reviews.length > 0 ? (
           <div className="space-y-4">
             {reviews.map((review) => (
               <div
                 key={review.id}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300"
+                className="bg-[#0f0f14] border border-[#27272f] rounded-2xl p-6 hover:border-gold-300/30 transition-all duration-300"
               >
                 <div className="flex items-start justify-between">
                   <Link
@@ -81,20 +81,20 @@ export function Reviews() {
                             key={i}
                             className={`w-4 h-4 ${
                               i < review.rating
-                                ? 'text-yellow-500 fill-yellow-500'
-                                : 'text-slate-600'
+                                ? 'text-gold-300 fill-gold-300'
+                                : 'text-zinc-700'
                             }`}
                           />
                         ))}
                       </div>
-                      <span className="px-2 py-0.5 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-500/30">
+                      <span className="px-2 py-0.5 badge-gold text-xs rounded-full">
                         {review.mediaType === 'movie' ? 'Filme' : 'Série'}
                       </span>
                     </div>
                     {review.comment && (
-                      <p className="text-slate-300 text-sm">{review.comment}</p>
+                      <p className="text-zinc-300 text-sm">{review.comment}</p>
                     )}
-                    <p className="text-slate-500 text-xs mt-2">
+                    <p className="text-zinc-500 text-xs mt-2">
                       {new Date(review.createdAt).toLocaleDateString('pt-BR')}
                     </p>
                   </Link>
@@ -102,7 +102,7 @@ export function Reviews() {
                     onClick={() =>
                       handleDelete(review.tmdbId, review.mediaType)
                     }
-                    className="text-slate-600 hover:text-red-400 transition-colors cursor-pointer ml-4"
+                    className="text-zinc-600 hover:text-red-400 transition-colors cursor-pointer ml-4"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -112,11 +112,11 @@ export function Reviews() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <Star className="w-12 h-12 text-slate-700 mx-auto mb-4" />
-            <p className="text-slate-400">Nenhuma review ainda</p>
+            <Star className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
+            <p className="text-zinc-400">Nenhuma review ainda</p>
             <Link
               to="/"
-              className="text-purple-400 hover:text-purple-300 text-sm mt-2 inline-block"
+              className="text-gold-300 hover:text-gold-200 text-sm mt-2 inline-block"
             >
               Explorar filmes e séries para avaliar
             </Link>

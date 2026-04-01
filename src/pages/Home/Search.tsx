@@ -48,7 +48,7 @@ export function Search() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-8">
+    <div className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-center mb-8">
           <SearchBar />
@@ -56,7 +56,7 @@ export function Search() {
 
         {query && (
           <div className="flex items-center gap-2 mb-6">
-            <SearchIcon className="w-5 h-5 text-purple-500" />
+            <SearchIcon className="w-5 h-5 text-gold-300" />
             <h2 className="text-xl font-semibold text-white">
               Resultados para "{query}"
             </h2>
@@ -64,7 +64,7 @@ export function Search() {
         )}
 
         {loading ? (
-          <div className="text-center py-12 text-slate-400">Buscando...</div>
+          <div className="text-center py-12 text-zinc-400">Buscando...</div>
         ) : results.length > 0 ? (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -77,7 +77,7 @@ export function Search() {
               <div className="text-center mt-8">
                 <button
                   onClick={loadMore}
-                  className="px-8 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-colors cursor-pointer"
+                  className="px-8 py-3 btn-gold rounded-xl font-medium transition-colors cursor-pointer"
                 >
                   Carregar mais
                 </button>
@@ -85,7 +85,7 @@ export function Search() {
             )}
           </>
         ) : query ? (
-          <div className="text-center py-12 text-slate-400">
+          <div className="text-center py-12 text-zinc-400">
             Nenhum resultado encontrado
           </div>
         ) : null}
