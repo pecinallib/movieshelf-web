@@ -6,6 +6,8 @@ import {
   removeFavorite,
   checkFavorite,
 } from '../../services/favorites';
+import { AddToList } from '../../components/ui/AddToList';
+import { ReviewForm } from '../../components/ui/ReviewForm';
 import { Heart, Star, Play, ArrowLeft } from 'lucide-react';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
@@ -83,13 +85,13 @@ export function TVDetails() {
   return (
     <div className="min-h-screen bg-slate-950">
       {show.backdrop_path && (
-        <div className="relative h-[400px] w-full">
+        <div className="relative h-100 w-full">
           <img
             src={`${BACKDROP_BASE}${show.backdrop_path}`}
             alt={show.name}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/60 to-transparent" />
         </div>
       )}
 
@@ -145,7 +147,7 @@ export function TVDetails() {
               ))}
             </div>
 
-            <div className="flex gap-3 mb-8">
+            <div className="flex flex-wrap gap-3 mb-8">
               <button
                 onClick={toggleFavorite}
                 disabled={favLoading}
@@ -160,6 +162,13 @@ export function TVDetails() {
                 />
                 {isFavorite ? 'Favoritado' : 'Favoritar'}
               </button>
+
+              <AddToList
+                tmdbId={show.id}
+                mediaType="tv"
+                title={show.name}
+                posterPath={show.poster_path}
+              />
 
               {trailer && (
                 <a
@@ -184,6 +193,10 @@ export function TVDetails() {
                 </p>
               </div>
             )}
+
+            <div className="mb-8">
+              <ReviewForm tmdbId={show.id} mediaType="tv" />
+            </div>
 
             {show.credits?.cast?.length > 0 && (
               <div>

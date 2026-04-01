@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetails } from '../../services/tmdb';
 import {
   addFavorite,
   removeFavorite,
   checkFavorite,
 } from '../../services/favorites';
+import { AddToList } from '../../components/ui/AddToList';
+import { ReviewForm } from '../../components/ui/ReviewForm';
 import { Heart, Star, Play, ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
@@ -112,7 +113,7 @@ export function MovieDetails() {
             <img
               src={`${IMG_BASE}${movie.poster_path}`}
               alt={movie.title}
-              className="w-64 rounded-2xl shadow-2xl flex-shrink-0 self-start"
+              className="w-64 rounded-2xl shadow-2xl shrink-0 self-start"
             />
           )}
 
@@ -145,7 +146,7 @@ export function MovieDetails() {
               ))}
             </div>
 
-            <div className="flex gap-3 mb-8">
+            <div className="flex flex-wrap gap-3 mb-8">
               <button
                 onClick={toggleFavorite}
                 disabled={favLoading}
@@ -160,6 +161,13 @@ export function MovieDetails() {
                 />
                 {isFavorite ? 'Favoritado' : 'Favoritar'}
               </button>
+
+              <AddToList
+                tmdbId={movie.id}
+                mediaType="movie"
+                title={movie.title}
+                posterPath={movie.poster_path}
+              />
 
               {trailer && (
                 <a
@@ -184,6 +192,10 @@ export function MovieDetails() {
                 </p>
               </div>
             )}
+
+            <div className="mb-8">
+              <ReviewForm tmdbId={movie.id} mediaType="movie" />
+            </div>
 
             {movie.credits?.cast?.length > 0 && (
               <div>
