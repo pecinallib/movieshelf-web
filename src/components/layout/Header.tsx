@@ -84,7 +84,12 @@ export function Header() {
 
               <div className="hidden md:flex items-center gap-4">
                 <ThemeToggle />
-                <span className="text-zinc-400 text-sm">{user?.name}</span>
+                <Link
+                  to="/profile"
+                  className="text-zinc-400 hover:text-gold-300 text-sm transition-colors"
+                >
+                  {user?.name}
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="text-zinc-400 hover:text-red-400 transition-colors cursor-pointer"
@@ -127,7 +132,11 @@ export function Header() {
           >
             {/* Header do sidebar */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-[#27272f]">
-              <div className="flex items-center gap-3">
+              <Link
+                to="/profile"
+                className="flex items-center gap-3"
+                onClick={() => setMenuOpen(false)}
+              >
                 <div className="w-10 h-10 rounded-full bg-gold-300/10 border border-gold-300/30 flex items-center justify-center">
                   <User className="w-5 h-5 text-gold-300" />
                 </div>
@@ -135,7 +144,7 @@ export function Header() {
                   <p className="text-white text-sm font-medium">{user?.name}</p>
                   <p className="text-zinc-500 text-xs">{user?.email}</p>
                 </div>
-              </div>
+              </Link>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="text-zinc-400 hover:text-white cursor-pointer"

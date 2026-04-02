@@ -12,6 +12,7 @@ import { Favorites } from './pages/Favorites/Favorites';
 import { Lists } from './pages/Lists/Lists';
 import { ListDetails } from './pages/Lists/ListDetails';
 import { Reviews } from './pages/Reviews/Reviews';
+import { Profile } from './pages/Profile/Profile';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -103,6 +104,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <Reviews />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <Profile />
           </PrivateRoute>
         }
       />
