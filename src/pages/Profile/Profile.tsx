@@ -6,6 +6,7 @@ import { AnimatedPage } from '../../components/ui/AnimatedPage';
 import { User, Heart, Star, List, LogOut, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { DetailsSkeleton } from '../../components/ui/Skeleton';
+import PageHead from '../../components/PageHead';
 
 export function Profile() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -66,6 +67,10 @@ export function Profile() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-2xl mx-auto">
+        <PageHead
+          title="Perfil"
+          description="Veja suas informações e estatísticas"
+        />
         {/* Avatar + Info */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Film } from 'lucide-react';
+import PageHead from '../../components/PageHead';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -29,6 +30,7 @@ export function Register() {
 
   return (
     <div className="min-h-screen bg-[#09090b] flex items-center justify-center px-4">
+      <PageHead title="Cadastro" description="Crie sua conta no MovieShelf" />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">

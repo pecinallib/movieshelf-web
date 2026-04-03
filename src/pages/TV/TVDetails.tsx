@@ -12,6 +12,7 @@ import { Heart, Star, Play, ArrowLeft } from 'lucide-react';
 import { AnimatedPage } from '../../components/ui/AnimatedPage';
 import { DetailsSkeleton } from '../../components/ui/Skeleton';
 import { motion } from 'framer-motion';
+import PageHead from '../../components/PageHead';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
@@ -85,6 +86,10 @@ export function TVDetails() {
     <AnimatedPage className="min-h-screen bg-[#09090b]">
       {show.backdrop_path && (
         <div className="relative h-100 w-full">
+          <PageHead
+            title="Detalhes da Série"
+            description="Veja mais informações sobre a série"
+          />
           <img
             src={`${BACKDROP_BASE}${show.backdrop_path}`}
             alt={show.name}

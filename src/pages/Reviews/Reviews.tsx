@@ -4,6 +4,7 @@ import { listMyReviews, deleteReview } from '../../services/reviews';
 import { Review } from '../../types/models';
 import { Star, Trash2 } from 'lucide-react';
 import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
+import PageHead from '../../components/PageHead';
 
 export function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -36,6 +37,10 @@ export function Reviews() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
+        <PageHead
+          title="Minhas Reviews"
+          description="Veja suas reviews e avaliações"
+        />
         <div className="flex items-center gap-2 mb-8">
           <Star className="w-6 h-6 text-gold-300" />
           <h1 className="text-2xl font-bold text-white">Minhas Reviews</h1>

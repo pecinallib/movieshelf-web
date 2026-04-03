@@ -4,6 +4,7 @@ import { getMyLists, createList, deleteList } from '../../services/lists';
 import { List } from '../../types/models';
 import { List as ListIcon, Plus, Trash2, Film } from 'lucide-react';
 import { AnimatedPage } from '../../components/ui/AnimatedPage';
+import PageHead from '../../components/PageHead';
 
 export function Lists() {
   const [lists, setLists] = useState<List[]>([]);
@@ -60,6 +61,10 @@ export function Lists() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
+        <PageHead
+          title="Listas"
+          description="Gerencie suas listas de filmes e séries"
+        />
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2">
             <ListIcon className="w-6 h-6 text-gold-300" />
