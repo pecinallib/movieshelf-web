@@ -7,6 +7,7 @@ import { CardGridSkeleton } from '../../components/ui/Skeleton';
 import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
 import { TMDBResult } from '../../types/tmdb';
 import { Search as SearchIcon } from 'lucide-react';
+import PageHead from '../../components/PageHead';
 
 export function Search() {
   const [searchParams] = useSearchParams();
@@ -51,6 +52,7 @@ export function Search() {
 
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
+      <PageHead title="Sua Busca" description="Procure por filmes e séries" />
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-center mb-8">
           <SearchBar />

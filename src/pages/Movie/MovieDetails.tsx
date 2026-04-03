@@ -12,6 +12,7 @@ import { Heart, Star, Play, ArrowLeft } from 'lucide-react';
 import { AnimatedPage } from '../../components/ui/AnimatedPage';
 import { DetailsSkeleton } from '../../components/ui/Skeleton';
 import { motion } from 'framer-motion';
+import PageHead from '../../components/PageHead';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_BASE = 'https://image.tmdb.org/t/p/original';
@@ -89,6 +90,10 @@ export function MovieDetails() {
     <AnimatedPage className="min-h-screen bg-[#09090b]">
       {movie.backdrop_path && (
         <div className="relative h-100 w-full">
+          <PageHead
+            title="Detalhes do Filme"
+            description="Veja mais informações sobre o filme"
+          />
           <img
             src={`${BACKDROP_BASE}${movie.backdrop_path}`}
             alt={movie.title}

@@ -5,6 +5,7 @@ import { Favorite } from '../../types/models';
 import { Heart } from 'lucide-react';
 import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
 import { CardGridSkeleton } from '../../components/ui/Skeleton';
+import PageHead from '../../components/PageHead';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
@@ -25,6 +26,10 @@ export function Favorites() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
+        <PageHead
+          title="Meus Favoritos"
+          description="Lista de seus filmes e séries favoritas"
+        />
         <div className="flex items-center gap-2 mb-8">
           <Heart className="w-6 h-6 text-red-400" />
           <h1 className="text-2xl font-bold text-white">Meus Favoritos</h1>

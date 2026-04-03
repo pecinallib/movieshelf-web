@@ -4,6 +4,7 @@ import { getListById, removeItemFromList } from '../../services/lists';
 import { List } from '../../types/models';
 import { ArrowLeft, Trash2 } from 'lucide-react';
 import { AnimatedPage, AnimatedItem } from '../../components/ui/AnimatedPage';
+import PageHead from '../../components/PageHead';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
@@ -55,6 +56,7 @@ export function ListDetails() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
+        <PageHead title="Mais Detalhes" description="Detalhes da sua lista" />
         <button
           onClick={() => navigate('/lists')}
           className="flex items-center gap-2 text-zinc-400 hover:text-white mb-6 transition-colors cursor-pointer"

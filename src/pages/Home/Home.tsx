@@ -7,6 +7,7 @@ import { getTrending, getGenres, discoverMedia } from '../../services/tmdb';
 import { TMDBResult } from '../../types/tmdb';
 import { Film, Tv, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
+import PageHead from '../../components/PageHead';
 
 interface Genre {
   id: number;
@@ -104,6 +105,7 @@ export function Home() {
   return (
     <AnimatedPage className="min-h-screen bg-[#09090b] px-4 py-8">
       <div className="max-w-7xl mx-auto">
+        <PageHead title="Início" description="Descubra filmes e séries" />
         {/* Header + Search */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
